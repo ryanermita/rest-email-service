@@ -1,0 +1,12 @@
+import os
+
+#REDIS CONFIG
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+# MAILER CONFIG
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USE_SSL = True
+MAIL_USERNAME = ''
+MAIL_PASSWORD = ''
+MAIL_DEFAULT_SENDER = ''
