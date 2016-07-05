@@ -1,11 +1,17 @@
 from flask import Flask, request, jsonify
-from utils import email_client, validation, celery_client
+from flask_mail import Mail, Message
+from utils import validation, celery_client
+from celery import Celery
 import config
+
 
 app = Flask(__name__)
 app.config.from_object(config)
-email_client.init_mailer(app)
-celery = celery_client.init_celery(app)
+#Mail
+mail = Mail()
+mail.init_app(app)
+#celery
+celery_app = celery_client.make_celery(app)
 
 @app.route('/')
 def index():
@@ -14,6 +20,7 @@ def index():
             'developer': 'Ryan Ermita'}
     return jsonify(resp)
 
+
 @app.route('/email/send', methods=['POST'])
 @validation.is_content_type_json
 @validation.is_all_field_present
@@ -21,9 +28,32 @@ def index():
 @validation.is_sender_a_valid_email
 @validation.is_recipients_a_valid_email
 def send():
-    email_client.send_email.apply_async(args=[request.json])
+    send_email.apply_async(args=[request.json])
     return jsonify({'success': True} )
 
+
+@celery_app.task(name='send_email')
+def send_email(data):
+    print "**************EMAIL PARAMETERS********"
+    print "sender: %s" % data['sender']
+    print "recipients: %s" % to_list(data['recipients'])
+    print "Subject: %s" % data['subject']
+    print "body:"
+    print data['body']
+    print "**************************************"
+    msg = Message(sender=data['sender'],
+                  recipients=to_list(data['recipients']),
+                  subject=data['subject'],
+                  body=data['body'])
+    print "*********SENDING EMAIL...!**********"
+    mail.send(msg)
+    print "*********EMAIL SENT!****************"
+
+    return True
+
+
+def to_list(r):
+  return r.split(',')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=3000)
