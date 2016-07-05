@@ -3,7 +3,7 @@ A simple email service using HTTP
 
 
 ## Setup
-1 Manual Setup
+1. Manual Setup
   * clone repo
   
   ```
@@ -16,7 +16,7 @@ A simple email service using HTTP
   pip install -r src/requirements.txt
   ```
 
-* Using Docker
+2. Using Docker
   * clone repo
   
   ```
