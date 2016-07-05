@@ -3,31 +3,31 @@ A simple email service using HTTP
 
 
 ## Setup
-* Manual Setup
-   1. clone repo
+1 Manual Setup
+  * clone repo
   
-   ```
-   git clone https://github.com/ryanermita/rest-email-service.git 
-   ```
+  ```
+  git clone https://github.com/ryanermita/rest-email-service.git 
+  ```
 
-   2. Install the project dependencies.
+  * Install the project dependencies.
   
-   ```
-   pip install -r src/requirements.txt
-   ```
+  ```
+  pip install -r src/requirements.txt
+  ```
 
 * Using Docker
-   1. clone repo
+  * clone repo
   
-   ```
-   git clone https://github.com/ryanermita/rest-email-service.git 
-   ```
+  ```
+  git clone https://github.com/ryanermita/rest-email-service.git 
+  ```
   
-   2. build project containers
+  * build project containers
   
-   ```
-   docker-compose build
-   ```
+  ```
+  docker-compose build
+  ```
   
 ## Environment Variables
 Use environment variable for config var.
