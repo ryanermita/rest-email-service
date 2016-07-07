@@ -3,6 +3,7 @@ from flask_mail import Mail, Message
 from utils import validation, celery_client
 from celery import Celery
 import config
+import logging
 
 
 app = Flask(__name__)
@@ -12,6 +13,9 @@ mail = Mail()
 mail.init_app(app)
 #celery
 celery_app = celery_client.make_celery(app)
+#logging
+logger = logging.getLogger('info')
+logger.setLevel(logging.INFO)
 
 @app.route('/')
 def index():
@@ -34,20 +38,20 @@ def send():
 
 @celery_app.task(name='send_email')
 def send_email(data):
-    print "**************EMAIL PARAMETERS********"
-    print "sender: %s" % data['sender']
-    print "recipients: %s" % to_list(data['recipients'])
-    print "Subject: %s" % data['subject']
-    print "body:"
-    print data['body']
-    print "**************************************"
+    logger.info("**************EMAIL PARAMETERS********")
+    logger.info("sender: %s" % data['sender'])
+    logger.info("recipients: %s" % to_list(data['recipients']))
+    logger.info("Subject: %s" % data['subject'])
+    logger.info("body:")
+    logger.info(data['body'])
+    logger.info("***************************************")
     msg = Message(sender=data['sender'],
                   recipients=to_list(data['recipients']),
                   subject=data['subject'],
                   body=data['body'])
-    print "*********SENDING EMAIL...!**********"
+    logger.info("*********SENDING EMAIL...***********")
     mail.send(msg)
-    print "*********EMAIL SENT!****************"
+    logger.info("*********EMAIL SENT*****************")
 
     return True
 
