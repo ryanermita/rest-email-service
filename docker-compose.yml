@@ -23,7 +23,7 @@ services:
       - redis:redis
   mailer:
     build: ./
-    command: python server.py && python -m celery -A server.celery_app worker
+    command: python server.py
     volumes:
       - ./src:/opt/app
     environment:
