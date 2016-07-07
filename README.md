@@ -59,3 +59,32 @@ The env variables below is base on [Flask-Mail](https://pythonhosted.org/Flask-M
   ```
   docker-compose up
   ```
+
+## Sample
+Sample request:
+
+```json
+ {
+    "subject": "Sample Subject",
+    "sender": "sender@email.com",
+    "recipients": "recipient1@email.com, recipientN@email.com",
+    "body": "Your message here."
+}
+```
+
+*subject -  the subject of the email.
+*sender - mail sender in email format.
+*recipients - list of mail recipients separated by comma and in email format.
+*body - the e-mail message.
+
+Sample Response
+
+```json
+ {
+    "success": true,
+    "error": ''
+}
+```
+
+*success - boolean if sending of email is successful or not.
+*error - error description if an erro occured.
