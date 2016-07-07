@@ -33,7 +33,7 @@ def index():
 @validation.is_recipients_a_valid_email
 def send():
     send_email.apply_async(args=[request.json])
-    return jsonify({'success': True, 'error': ''})
+    return jsonify({'success': True, 'error': ''}), 200
 
 
 @celery_app.task(name='send_email')
