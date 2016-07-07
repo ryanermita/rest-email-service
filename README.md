@@ -72,13 +72,13 @@ Sample request:
 }
 ```
 
-*subject -  the subject of the email.
+* subject -  the subject of the email.
 
-*sender - mail sender in email format.
+* sender - mail sender in email format.
 
-*recipients - list of mail recipients separated by comma and in email format.
+* recipients - list of mail recipients separated by comma and in email format.
 
-*body - the e-mail message.
+* body - the e-mail message.
 
 Sample Response
 
@@ -89,6 +89,6 @@ Sample Response
 }
 ```
 
-*success - boolean if sending of email is successful or not.
+* success - boolean if sending of email is successful or not.
 
-*error - error description if an erro occured.
+* error - error description if an erro occured.
